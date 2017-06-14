@@ -589,7 +589,7 @@ def main():
     logging.basicConfig(level=getattr(logging, 'DEBUG'),
                         format='%(asctime)s - %(levelname)s - pid:%(process)d - %(message)s')
     try:
-        proxy = HTTP(get_local_ip(), 8080)
+        proxy = HTTP(get_local_ip(), PROXY_PORT)
         proxy.run()
     except KeyboardInterrupt:
         pass
