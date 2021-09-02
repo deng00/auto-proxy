@@ -3,7 +3,7 @@
 __author__ = 'Danny0'
 import redis
 from config import *
-from logger import Logger
+from .logger import Logger
 
 redis_instance = None
 log_instance = None
