@@ -9,7 +9,6 @@ __author__ = 'Danny0'
 
 class ProxyGetter():
     proxy_source = [
-        "tudoudaili",
         "kuaidaili"
     ]
 
@@ -22,25 +21,6 @@ class ProxyGetter():
             return False
         ips = eval("self.from_" + source + "(num)")
         self.log_ins.debug("got new ip num : " + str(len(ips)))
-        return ips
-
-    def from_tudoudaili(self, num):
-        self.log_ins.debug("start get new ip from tudoudaili")
-        api = "http://tvp.daxiangdaili.com/ip/"
-        param = {
-            "tid": ORDER_ID_TUDOU,
-            "num": num,
-            "area": "",
-            "foreign": "all",
-            "ports": "",
-            "exclude_ports": "",
-            "protocol": "",
-            "filter": "on"
-        }
-        res = requests.get(api, param)
-        if res.text[0:5] == "ERROR":
-            return []
-        ips = res.text.split("\r\n")
         return ips
 
     def from_kuaidaili(self, num):
@@ -66,4 +46,4 @@ class ProxyGetter():
 
 if __name__ == '__main__':
     getter = ProxyGetter()
-    print(getter.get_ip("tudoudaili", 2))
+    print(getter.get_ip("kuaidaili", 2))
