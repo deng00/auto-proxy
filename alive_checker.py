@@ -42,14 +42,14 @@ class CheckProxy(threading.Thread):
         ips = ip_str.split(":")
         ip = ips[0]
         try:
-            res = requests.get("http://ip.cn", timeout=CHECK_TIMEOUT,
+            res = requests.get("http://api.ipify.org", timeout=CHECK_TIMEOUT,
                                headers={
                                    "User-Agent": "curl/7.43.0"
                                },
                                proxies={
                                    "http": "http://" + ip_str
                                })
-            if not re.search(ip, res.text) or not re.match(u"当前", res.text):
+            if not re.search(ip, res.text):
                 log_ins.warning(ip + " can't use")
                 return False
             else:
