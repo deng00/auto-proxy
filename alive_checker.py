@@ -64,9 +64,10 @@ class CheckProxy(threading.Thread):
         global ip_list
         while len(ip_list) > 0:
             ip = ip_list.pop()
-            if not self.check_alive_by_port(ip) or not self.check_alive_by_curl(ip):
-                log_ins.warning("remove ip : " + ip)
-                redis_ins.zrem(REDIS_KEY, ip)
+            strIp = bytes.decode(ip)
+            if not self.check_alive_by_port(strIp) or not self.check_alive_by_curl(strIp):
+                log_ins.warning("remove ip : " + strIp)
+                redis_ins.zrem(REDIS_KEY, strIp)
 
 
 def check():
@@ -90,7 +91,7 @@ def save(ips):
     :return: 
     """
     for ip in ips:
-        redis_ins.zadd(REDIS_KEY, ip, 0)
+        redis_ins.zadd(REDIS_KEY, {ip: 0})
 
 
 if __name__ == '__main__':
